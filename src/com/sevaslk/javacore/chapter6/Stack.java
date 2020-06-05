@@ -1,18 +1,18 @@
 package com.sevaslk.javacore.chapter6;
 
 class Stack {
-    int[] stck = new int[10];
-    int tos;
+    private int[] stck = new int[10];
+    private int tos;
 
     Stack() {
-        tos = -1;
+        tos = -1; //инициализация вершины стека
     }
 
     void push(int item) {
         if (tos == 9) {
             System.out.println("Стек заполнен.");
         } else {
-            stck[++tos] = item;
+            stck[++tos] = item; //помещение элемента в стек
         }
     }
 
@@ -21,7 +21,7 @@ class Stack {
             System.out.println("Стек не загружен.");
             return 0;
         } else {
-            return stck[tos--];
+            return stck[tos--]; //извлечение элемента из стека
         }
     }
 
