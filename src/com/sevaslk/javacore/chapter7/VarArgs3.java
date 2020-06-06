@@ -18,7 +18,7 @@ class VarArgs3 {
     }
 
     static void vaTest(String msg, int... v) {
-        System.out.print("vaTest(String, int...): " + msg + v.length + " Содержимое: ");
+        System.out.print("vaTest(String, int...): " + msg + "Количество аргументов: " + v.length + " Содержимое: ");
         for (int x : v) {
             System.out.print(x + " ");
         }
