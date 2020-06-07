@@ -1,7 +1,5 @@
 package com.sevaslk.javacore.chapter8;
 
-import javax.imageio.stream.ImageInputStream;
-
 class A1 {
     int i;
 }
@@ -17,7 +15,6 @@ class A2 extends A1 {
     void show() {
         System.out.println("Член i в суперклассе: " + super.i);
         System.out.println("Член i в подклассе: " + i);
-
     }
 }
 
