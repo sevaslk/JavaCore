@@ -17,7 +17,7 @@ public class SampleSwitch {
                     System.out.println("i = 3.");
                     break;
                 default:
-                    System.out.println("i > 3.");
+                    System.out.println("i > 3 && i < 6.");
             }
         }
     }

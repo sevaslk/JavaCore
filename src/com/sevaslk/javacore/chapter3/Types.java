@@ -13,7 +13,8 @@ public class Types {
         b = (byte) d;
         System.out.println(b);
         byte b1 = 50;
-        b1 = (byte) (b * 2);
+        byte b3 = 2;
+        b1 = (byte) (b * b3);
 
 
         double result = (5.67f * (byte) 42) + (50000 / 'a') - (.1234d * (short) 1024);
