@@ -4,20 +4,19 @@ class Field {
     private StepOptions firstPlayerOption;
     private StepOptions secondPlayerOption;
 
-    public void setFirstPlayerOption(StepOptions firstPlayerOption) {
+    void setFirstPlayerOption(StepOptions firstPlayerOption) {
         this.firstPlayerOption = firstPlayerOption;
     }
 
-    public void setSecondPlayerOption(StepOptions secondPlayerOption) {
+    void setSecondPlayerOption(StepOptions secondPlayerOption) {
         this.secondPlayerOption = secondPlayerOption;
     }
 
-    public StepOptions getFirstPlayerOption() {
+    StepOptions getFirstPlayerOption() {
         return firstPlayerOption;
     }
 
-    public StepOptions getSecondPlayerOption() {
+    StepOptions getSecondPlayerOption() {
         return secondPlayerOption;
     }
-
 }

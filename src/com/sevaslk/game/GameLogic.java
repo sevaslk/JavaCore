@@ -1,108 +1,96 @@
 package com.sevaslk.game;
 
-import java.util.Scanner;
-
-import static com.sevaslk.game.StepOptions.*;
 import static com.sevaslk.game.GameStatistic.*;
+import static com.sevaslk.game.StepOptions.*;
+import static com.sevaslk.game.InOutMsg.*;
 
 class GameLogic {
-    private Field field = new Field();
+    private Field field;
+    private HumanPlayer humanPlayer;
+    private ComputerPlayer computerPlayer;
+    private StepOptions tempReturn;
+
+    GameLogic() {
+        field = new Field();
+        humanPlayer = new HumanPlayer();
+        computerPlayer = new ComputerPlayer();
+    }
 
     void startGame() {
-        HumanPlayer humanPlayer = new HumanPlayer();
-        ComputerPlayer computerPlayer = new ComputerPlayer();
 
-        System.out.println(InOutMsg.TIPS_FOR_GAME.getMsg());
-        System.out.println(InOutMsg.INVITE_TO_STEP.getMsg());
-//        validateInput(getInput());
-        field.setFirstPlayerOption(stepHandle(getInput(humanPlayer.step())));
-        field.setSecondPlayerOption(stepHandle(computerPlayer.step()));
-        checkWinner(field.getFirstPlayerOption(), field.getSecondPlayerOption());
-        playAgain();
+        System.out.println(TIPS_FOR_GAME.getMsg());
+        System.out.println(INVITE_TO_STEP.getMsg());
+
+        field.setFirstPlayerOption(stepHandle(getInput(validateInput(humanPlayer.step()))));
+        System.out.println(USER_CHOICE.getMsg() + field.getFirstPlayerOption());
+
+        field.setSecondPlayerOption(stepHandle(getInput(computerPlayer.step())));
+        System.out.println(COMPUTER_CHOICE.getMsg() + field.getSecondPlayerOption());
+
+        System.out.println(resultCalculation(field.getFirstPlayerOption(), field.getSecondPlayerOption()));
+        startGame();
     }
 
     private int getInput(int a) {
         return a;
     }
 
-    private String getInput(String s) {
-        return s;
-    }
-
-    private void validateInput(int humanInput) {
-        if (getInput(humanInput) < 1 || getInput(humanInput) > 3) {
-            System.out.println(InOutMsg.INVALID_INPUT_MSG.getMsg());
-            playAgain();
-        }
-    }
-
-    private void checkWinner(StepOptions firstPlayerOption, StepOptions secondPlayerOption) {
-        if (firstPlayerOption == secondPlayerOption) {
-            System.out.println(InOutMsg.DRAW.getMsg());
-            setDraws(getDraws() + 1);
-        }
-        if (STONE.equals(firstPlayerOption)) {
-            if (secondPlayerOption.equals(PAPER)) {
-                System.out.println(InOutMsg.COMPUTER_WIN.getMsg());
-                setComputerWins(getComputerWins() + 1);
-            } else if (secondPlayerOption.equals(SCISSORS)) {
-                System.out.println(InOutMsg.YOU_WIN.getMsg());
-                setUserWins(getUserWins() + 1);
-            }
-        } else if (SCISSORS.equals(firstPlayerOption)) {
-            if (secondPlayerOption.equals(STONE)) {
-                System.out.println(InOutMsg.COMPUTER_WIN.getMsg());
-                setComputerWins(getComputerWins() + 1);
-            } else if (secondPlayerOption.equals(PAPER)) {
-                System.out.println(InOutMsg.YOU_WIN.getMsg());
-                setUserWins(getUserWins() + 1);
-            }
-        } else if (PAPER.equals(firstPlayerOption)) {
-            if (secondPlayerOption.equals(SCISSORS)) {
-                System.out.println(InOutMsg.COMPUTER_WIN.getMsg());
-                setComputerWins(getComputerWins() + 1);
-            } else if (secondPlayerOption.equals(STONE)) {
-                System.out.println(InOutMsg.YOU_WIN.getMsg());
-                setUserWins(getUserWins() + 1);
-            }
-        }
-    }
-
-    private void playAgain() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(InOutMsg.PLAY_AGAIN.getMsg());
-        if ((scanner.nextLine()).toUpperCase().equals("Y")) {
+    private int validateInput(int humanInput) {
+        if (getInput(humanInput) < 0 || getInput(humanInput) > 3) {
+            System.out.println(INVALID_INPUT_MSG.getMsg());
             startGame();
-        } else {
+        }
+        if (getInput(humanInput) == 0) {
             scorePrint();
+            checkWinner();
+            System.exit(0);
+        }
+        return getInput(humanInput);
+    }
+
+    private void checkWinner() {
+        if (GameStatistic.getUserWins() > GameStatistic.getComputerWins()) {
+            System.out.println(USER_WON.getMsg());
+        }
+        if (GameStatistic.getUserWins() < GameStatistic.getComputerWins()) {
+            System.out.println(COMPUTER_WON.getMsg());
+        } else {
+            System.out.println(DRAW_WON.getMsg());
+        }
+    }
+
+    private String resultCalculation(StepOptions firstPlayerOption, StepOptions secondPlayerOption) {
+        if (firstPlayerOption == secondPlayerOption) {
+            setDraws(getDraws() + 1);
+            return DRAW.getMsg();
+        }
+        if ((firstPlayerOption.equals(STONE)) && (secondPlayerOption.equals(PAPER)) ||
+                (firstPlayerOption.equals(SCISSORS)) && (secondPlayerOption.equals(STONE)) ||
+                (firstPlayerOption.equals(PAPER)) && (secondPlayerOption.equals(SCISSORS))) {
+            setComputerWins(getComputerWins() + 1);
+            return COMPUTER_WIN.getMsg();
+        } else {
+            setUserWins(getUserWins() + 1);
+            return YOU_WIN.getMsg();
         }
     }
 
     private void scorePrint() {
-        System.out.println(InOutMsg.USER_WINS.getMsg() + getUserWins());
-        System.out.println(InOutMsg.COMPUTER_WINS.getMsg() + getComputerWins());
-        System.out.println(InOutMsg.DRAW.getMsg() + getDraws());
+        System.out.println(USER_WINS.getMsg() + getUserWins());
+        System.out.println(COMPUTER_WINS.getMsg() + getComputerWins());
+        System.out.println(DRAW.getMsg() + getDraws());
     }
 
     private StepOptions stepHandle(int playerInput) {
-        StepOptions result = STONE;
-        if (playerInput == 1) {
-            System.out.println(InOutMsg.USER_CHOICE.getMsg() + STONE);
-            return result;
-        } else if (playerInput == 2) {
-            System.out.println(InOutMsg.USER_CHOICE.getMsg() + SCISSORS);
-            result = SCISSORS;
-            return result;
-        } else if (playerInput == 3) {
-            System.out.println(InOutMsg.USER_CHOICE.getMsg() + PAPER);
-            result = PAPER;
-            return result;
-        } else {
-            System.out.println(InOutMsg.INVALID_INPUT_MSG.getMsg());
+        for (StepOptions stepOptions : StepOptions.values()) {
+            if (playerInput == stepOptions.getId()) {
+                tempReturn = stepOptions;
+            }
         }
-        return result;
+        return tempReturn;
     }
 }
+
 
 
 
