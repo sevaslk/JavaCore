@@ -1,5 +1,13 @@
 package com.sevaslk.game;
 
-public interface Player {
-    StepOptions step();
+enum Type {
+    HUMAN, COMPUTER
 }
+
+abstract class Player {
+    Type playerType;
+    String name = "";
+
+    abstract int step();
+}
+

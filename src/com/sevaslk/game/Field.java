@@ -1,13 +1,23 @@
 package com.sevaslk.game;
 
 class Field {
-    static int userWins = 0;
-    static int computerWins = 0;
-    static int draws = 0;
+    private StepOptions firstPlayerOption;
+    private StepOptions secondPlayerOption;
 
-    static void scorePrint() {
-        System.out.println("Your wins: " + userWins);
-        System.out.println("Your wins: " + computerWins);
-        System.out.println("Draws" + draws);
+    public void setFirstPlayerOption(StepOptions firstPlayerOption) {
+        this.firstPlayerOption = firstPlayerOption;
     }
+
+    public void setSecondPlayerOption(StepOptions secondPlayerOption) {
+        this.secondPlayerOption = secondPlayerOption;
+    }
+
+    public StepOptions getFirstPlayerOption() {
+        return firstPlayerOption;
+    }
+
+    public StepOptions getSecondPlayerOption() {
+        return secondPlayerOption;
+    }
+
 }
