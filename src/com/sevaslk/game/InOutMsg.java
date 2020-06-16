@@ -10,7 +10,6 @@ public enum InOutMsg {
     INVITE_TO_STEP("\"Make your step:\""),
     COMPUTER_WIN("Computer win"),
     YOU_WIN("You win"),
-    PLAY_AGAIN("Do you want one more play? Y/N"),
     USER_WON("User WON!"),
     COMPUTER_WON("Computer WON!"),
     DRAW_WON("Friendship WON!"),

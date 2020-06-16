@@ -1,14 +1,13 @@
 package com.sevaslk.game;
 
 import static com.sevaslk.game.GameStatistic.*;
-import static com.sevaslk.game.StepOptions.*;
 import static com.sevaslk.game.InOutMsg.*;
+import static com.sevaslk.game.StepOptions.*;
 
 class GameLogic {
     private Field field;
     private HumanPlayer humanPlayer;
     private ComputerPlayer computerPlayer;
-    private StepOptions tempReturn;
 
     GameLogic() {
         field = new Field();
@@ -64,9 +63,9 @@ class GameLogic {
             setDraws(getDraws() + 1);
             return DRAW.getMsg();
         }
-        if ((firstPlayerOption.equals(STONE)) && (secondPlayerOption.equals(PAPER)) ||
-                (firstPlayerOption.equals(SCISSORS)) && (secondPlayerOption.equals(STONE)) ||
-                (firstPlayerOption.equals(PAPER)) && (secondPlayerOption.equals(SCISSORS))) {
+        if ((firstPlayerOption.equals(STONE)) && (secondPlayerOption.equals(PAPER))
+                || (firstPlayerOption.equals(SCISSORS)) && (secondPlayerOption.equals(STONE))
+                || (firstPlayerOption.equals(PAPER)) && (secondPlayerOption.equals(SCISSORS))) {
             setComputerWins(getComputerWins() + 1);
             return COMPUTER_WIN.getMsg();
         } else {
@@ -81,13 +80,13 @@ class GameLogic {
         System.out.println(DRAW.getMsg() + getDraws());
     }
 
-    private StepOptions stepHandle(int playerInput) {
+    private StepOptions stepHandle(int playerInput) throws NullPointerException  {
         for (StepOptions stepOptions : StepOptions.values()) {
             if (playerInput == stepOptions.getId()) {
-                tempReturn = stepOptions;
+                return stepOptions;
             }
         }
-        return tempReturn;
+        return null;
     }
 }
 
