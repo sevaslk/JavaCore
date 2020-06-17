@@ -1,5 +1,7 @@
 package com.sevaslk.game;
 
+import java.util.InputMismatchException;
+
 import static com.sevaslk.game.GameStatistic.*;
 import static com.sevaslk.game.InOutMsg.*;
 import static com.sevaslk.game.StepOptions.*;
@@ -17,16 +19,20 @@ class GameLogic {
 
     void startGame() {
 
-        System.out.println(TIPS_FOR_GAME.getMsg());
-        System.out.println(INVITE_TO_STEP.getMsg());
+        try {
+            System.out.println(TIPS_FOR_GAME.getMsg());
+            System.out.println(INVITE_TO_STEP.getMsg());
 
-        field.setFirstPlayerOption(stepHandle(getInput(validateInput(humanPlayer.step()))));
-        System.out.println(USER_CHOICE.getMsg() + field.getFirstPlayerOption());
+            field.setFirstPlayerOption(stepHandle(getInput(validateInput(humanPlayer.step()))));
+            System.out.println(USER_CHOICE.getMsg() + field.getFirstPlayerOption());
 
-        field.setSecondPlayerOption(stepHandle(getInput(computerPlayer.step())));
-        System.out.println(COMPUTER_CHOICE.getMsg() + field.getSecondPlayerOption());
+            field.setSecondPlayerOption(stepHandle(getInput(computerPlayer.step())));
+            System.out.println(COMPUTER_CHOICE.getMsg() + field.getSecondPlayerOption());
 
-        System.out.println(resultCalculation(field.getFirstPlayerOption(), field.getSecondPlayerOption()));
+            System.out.println(resultCalculation(field.getFirstPlayerOption(), field.getSecondPlayerOption()));
+        } catch (IllegalArgumentException | NullPointerException | InputMismatchException e) {
+            System.out.println(EXC_MSG.getMsg());
+        }
         startGame();
     }
 
@@ -80,7 +86,7 @@ class GameLogic {
         System.out.println(DRAW.getMsg() + getDraws());
     }
 
-    private StepOptions stepHandle(int playerInput) throws NullPointerException  {
+    private StepOptions stepHandle(int playerInput) throws IllegalArgumentException, NullPointerException {
         for (StepOptions stepOptions : StepOptions.values()) {
             if (playerInput == stepOptions.getId()) {
                 return stepOptions;

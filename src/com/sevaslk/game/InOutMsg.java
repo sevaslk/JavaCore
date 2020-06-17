@@ -13,7 +13,8 @@ public enum InOutMsg {
     USER_WON("User WON!"),
     COMPUTER_WON("Computer WON!"),
     DRAW_WON("Friendship WON!"),
-    INVALID_INPUT_MSG("Enter number '1' - '3' to choice or '0' to exit: ");
+    INVALID_INPUT_MSG("Enter number '1' - '3' to choice or '0' to exit: "),
+    EXC_MSG("Something wrong, play again.");
 
 
     private String msg;
