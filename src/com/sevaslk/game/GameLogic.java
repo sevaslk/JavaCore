@@ -20,20 +20,26 @@ class GameLogic {
     void startGame() {
 
         try {
-            System.out.println(TIPS_FOR_GAME.getMsg());
-            System.out.println(INVITE_TO_STEP.getMsg());
 
-            field.setFirstPlayerOption(stepHandle(getInput(validateInput(humanPlayer.step()))));
-            System.out.println(USER_CHOICE.getMsg() + field.getFirstPlayerOption());
+            try {
+                System.out.println(TIPS_FOR_GAME.getMsg());
+                System.out.println(INVITE_TO_STEP.getMsg());
 
-            field.setSecondPlayerOption(stepHandle(getInput(computerPlayer.step())));
-            System.out.println(COMPUTER_CHOICE.getMsg() + field.getSecondPlayerOption());
+                field.setFirstPlayerOption(stepHandle(getInput(validateInput(humanPlayer.step()))));
+                System.out.println(USER_CHOICE.getMsg() + field.getFirstPlayerOption());
 
-            System.out.println(resultCalculation(field.getFirstPlayerOption(), field.getSecondPlayerOption()));
+                field.setSecondPlayerOption(stepHandle(getInput(computerPlayer.step())));
+                System.out.println(COMPUTER_CHOICE.getMsg() + field.getSecondPlayerOption());
+
+                System.out.println(resultCalculation(field.getFirstPlayerOption(), field.getSecondPlayerOption()));
+            } catch (ToExitException e) {
+                System.err.println("INFO: Exception is: " + e);
+                exit();
+            }
+            startGame();
         } catch (IllegalArgumentException | NullPointerException | InputMismatchException e) {
             System.out.println(EXC_MSG.getMsg());
         }
-        startGame();
     }
 
     private int getInput(int a) {
@@ -46,11 +52,15 @@ class GameLogic {
             startGame();
         }
         if (getInput(humanInput) == 0) {
-            scorePrint();
-            checkWinner();
-            System.exit(0);
+            throw new ToExitException();
         }
         return getInput(humanInput);
+    }
+
+    private void exit() {
+        scorePrint();
+        checkWinner();
+        System.exit(0);
     }
 
     private void checkWinner() {
@@ -59,7 +69,8 @@ class GameLogic {
         }
         if (GameStatistic.getUserWins() < GameStatistic.getComputerWins()) {
             System.out.println(COMPUTER_WON.getMsg());
-        } else {
+        }
+        if (GameStatistic.getUserWins() == GameStatistic.getComputerWins()) {
             System.out.println(DRAW_WON.getMsg());
         }
     }
@@ -83,7 +94,7 @@ class GameLogic {
     private void scorePrint() {
         System.out.println(USER_WINS.getMsg() + getUserWins());
         System.out.println(COMPUTER_WINS.getMsg() + getComputerWins());
-        System.out.println(DRAW.getMsg() + getDraws());
+        System.out.println(DRAWS.getMsg() + getDraws());
     }
 
     private StepOptions stepHandle(int playerInput) throws IllegalArgumentException, NullPointerException {
