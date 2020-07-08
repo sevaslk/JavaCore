@@ -47,7 +47,8 @@ class GameLogic {
     }
 
     private int validateInput(int humanInput) {
-        if (getInput(humanInput) < 0 || getInput(humanInput) > 3) {
+        if (getInput(humanInput) != 0 && getInput(humanInput) != 3
+                && getInput(humanInput) != 2 && getInput(humanInput) != 1) {
             System.out.println(INVALID_INPUT_MSG.getMsg());
             startGame();
         }
@@ -97,13 +98,13 @@ class GameLogic {
         System.out.println(DRAWS.getMsg() + getDraws());
     }
 
-    private StepOptions stepHandle(int playerInput) throws IllegalArgumentException, NullPointerException {
+    private StepOptions stepHandle(int playerInput) {
         for (StepOptions stepOptions : StepOptions.values()) {
             if (playerInput == stepOptions.getId()) {
                 return stepOptions;
             }
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 }
 

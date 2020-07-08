@@ -9,6 +9,5 @@ class GameLogicTest {
     @Test
     void startGame() {
         assertEquals(1, StepOptions.STONE.getId());
-
     }
 }
