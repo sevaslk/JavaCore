@@ -1,7 +1,7 @@
 package com.sevaslk.javacore.chapter14;
 
 class Gen<T> {
-    private T ob;
+    T ob;
 
     Gen(T o) {
         ob = o;
@@ -13,7 +13,7 @@ class Gen<T> {
 
     void showType() {
         System.out.println("Типом Т является " + ob.getClass().getName()); // TODO: 17.07.2020 зачем здесь getName()??
-    }
+    }// FIXME: 18.07.2020 test
 }
 
 class GenDemo {
