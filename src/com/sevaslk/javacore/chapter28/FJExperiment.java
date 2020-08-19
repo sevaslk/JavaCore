@@ -4,7 +4,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
 class Transform extends RecursiveAction {
-    private static final long serialVersionUID = 6841102253261589861L;
+    private static final long serialVersionUID = 21542144381449387L;
     private int seqThreshold;
     private double[] data;
     private int start;
@@ -59,6 +59,7 @@ class FJExperiment {
         beginT = System.nanoTime();
         fjp.invoke(task);
         endT = System.nanoTime();
+
         System.out.println("Уровень параллелизма: " + pLevel);
         System.out.println("Порог последовательной обработки: " + threshold);
         System.out.println("Истекшее время: " + (endT - beginT) + " нс");
