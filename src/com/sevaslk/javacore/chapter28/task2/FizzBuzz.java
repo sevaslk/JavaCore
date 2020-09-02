@@ -1,6 +1,5 @@
 package com.sevaslk.javacore.chapter28.task2;
 
-
 import java.util.stream.IntStream;
 
 class FizzBuzz {
