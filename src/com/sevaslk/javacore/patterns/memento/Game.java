@@ -9,12 +9,12 @@ class Game {
         this.ms = ms;
     }
 
-    public void load(Save save) {
+    void load(Save save) {
         level = save.getLevel();
         ms = save.getMs();
     }
 
-    public Save save() {
+    Save save() {
         return new Save(level, ms);
     }
 
@@ -31,12 +31,12 @@ class Save {
     private final String level;
     private final int ms;
 
-    public Save(String level, int ms) {
+    Save(String level, int ms) {
         this.level = level;
         this.ms = ms;
     }
 
-    public String getLevel() {
+    String getLevel() {
         return level;
     }
 
@@ -48,11 +48,11 @@ class Save {
 class File {
     private Save save;
 
-    public Save getSave() {
+    Save getSave() {
         return save;
     }
 
-    public void setSave(Save save) {
+    void setSave(Save save) {
         this.save = save;
     }
 }

@@ -3,7 +3,7 @@ package com.sevaslk.javacore.patterns.state;
 class Radio {
     private Station station;
 
-    public void setStation(Station station) {
+    void setStation(Station station) {
         this.station = station;
     }
 

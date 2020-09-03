@@ -1,13 +1,13 @@
 package com.sevaslk.javacore.patterns.prototype;
 
 class SomethingFactory {
-    Something something;
+    private Something something;
 
-    public SomethingFactory(Something something) {
+    SomethingFactory(Something something) {
        setSomething(something);
     }
 
-    public void setSomething(Something something) {
+    void setSomething(Something something) {
         this.something = something;
     }
 

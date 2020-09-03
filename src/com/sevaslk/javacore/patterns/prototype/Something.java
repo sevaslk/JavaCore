@@ -1,10 +1,10 @@
 package com.sevaslk.javacore.patterns.prototype;
 
 class Something implements Copyable {
-    int option1;
-    String option2;
+    private int option1;
+    private String option2;
 
-    public Something(int option1, String option2) {
+    Something(int option1, String option2) {
         this.option1 = option1;
         this.option2 = option2;
     }

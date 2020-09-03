@@ -10,19 +10,19 @@ class BuilderDemo {
 }
 
 class Car {
-    String mark;
-    Transmission transmission;
-    int maxSpeed;
+    private String mark;
+    private Transmission transmission;
+    private int maxSpeed;
 
-    public void setMark(String mark) {
+    void setMark(String mark) {
         this.mark = mark;
     }
 
-    public void setTransmission(Transmission transmission) {
+    void setTransmission(Transmission transmission) {
         this.transmission = transmission;
     }
 
-    public void setMaxSpeed(int maxSpeed) {
+    void setMaxSpeed(int maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
 

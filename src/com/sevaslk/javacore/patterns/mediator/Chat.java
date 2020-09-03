@@ -15,6 +15,7 @@ class TextChat implements Chat {
         this.admin = admin;
     }
 
+
     void addUser(User user) {
         users.add(user);
     }

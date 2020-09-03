@@ -16,7 +16,7 @@ class MeteoStation implements Observed {
     private int pressure;
     private List<Observer> observers = new ArrayList<>();
 
-    public void setMeasurement(int t, int p) {
+    void setMeasurement(int t, int p) {
         temperature = t;
         pressure = p;
         notifyObservers();

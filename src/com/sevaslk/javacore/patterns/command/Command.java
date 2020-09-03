@@ -21,7 +21,7 @@ class Computer {
 class StartCommand implements Command {
     private Computer computer;
 
-    public StartCommand(Computer computer) {
+    StartCommand(Computer computer) {
         this.computer = computer;
     }
 
@@ -34,7 +34,7 @@ class StartCommand implements Command {
 class StopCommand implements Command {
     private Computer computer;
 
-    public StopCommand(Computer computer) {
+    StopCommand(Computer computer) {
         this.computer = computer;
     }
 
@@ -47,7 +47,7 @@ class StopCommand implements Command {
 class ResetCommand implements Command {
     private Computer computer;
 
-    public ResetCommand(Computer computer) {
+    ResetCommand(Computer computer) {
         this.computer = computer;
     }
 
@@ -58,11 +58,11 @@ class ResetCommand implements Command {
 }
 
 class User {
-    Command start;
-    Command stop;
-    Command reset;
+    private Command start;
+    private Command stop;
+    private Command reset;
 
-    public User(Command start, Command stop, Command reset) {
+    User(Command start, Command stop, Command reset) {
         this.start = start;
         this.stop = stop;
         this.reset = reset;
